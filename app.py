@@ -165,12 +165,10 @@ def verify():
         verified_tokens[token] = expected
         pending_tokens.pop(token, None)
 
-        new_count = increment_progress()
+        increment_progress()
         return jsonify({
             "success": True,
-            "message": "Correct!",
-            "progress": new_count,
-            "required": REQUIRED_SOLVES
+            "message": "Correct!"
         })
     else:
         return jsonify({"success": False, "message": "Wrong answer. Try a new captcha."}), 400
@@ -201,10 +199,9 @@ Disallow: /dev-notes.txt
 def dev_notes():
     # Only tell them they need 100 successful verifications.
     # No mention of the token-reuse bug — they must discover it themselves.
-    notes = """# Internal Dev Notes — Not a Robot Checkpoint
-
-
+    notes = """
 Players must successfully verify the captcha 100 times in the same session before the flag is released.
+
 """
     return notes, 200, {"Content-Type": "text/plain"}
 
@@ -218,3 +215,4 @@ def progress_endpoint():
 if __name__ == "__main__":
     # For local testing
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=False)
+
