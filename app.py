@@ -20,7 +20,7 @@ pending_tokens = {}           # token -> expected answer (fresh captchas)
 verified_tokens = {}          # token -> answer  (once correct, NEVER invalidated — the bug)
 
 REQUIRED_SOLVES = 100
-FLAG = "Securinets{the_prez_is_not_a_robot_in_the_end_0a076d}"
+FLAG = "Securinets{thE_preZ_is_n0t_4_R0b0t_iN_tHe_enD}"
 
 def get_session_id():
     if "sid" not in session:
@@ -203,14 +203,8 @@ def dev_notes():
     # No mention of the token-reuse bug — they must discover it themselves.
     notes = """# Internal Dev Notes — Not a Robot Checkpoint
 
-TODO before go-live:
-- Make sure the progress counter is strictly server-side.
-- Players must successfully verify the captcha 100 times in the same session before the flag is released.
-- Captcha images are intentionally noisy; that's by design.
-- /admin is just a joke endpoint, leave it.
-- Remember to set FLASK_SECRET in production.
 
-Last checked: the counter lives in memory keyed by session id.
+Players must successfully verify the captcha 100 times in the same session before the flag is released.
 """
     return notes, 200, {"Content-Type": "text/plain"}
 
